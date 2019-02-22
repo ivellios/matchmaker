@@ -11,7 +11,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class GameSerializer(serializers.HyperlinkedModelSerializer):
+    creator = UserSerializer(read_only=True)
 
     class Meta:
         model = Game
-        fields = ('created', 'creator', 'player1', 'player2', 'player1_score', 'player2_score')
+        fields = ('url', 'created', 'creator',
+                  'player1', 'player2',
+                  'player1_score', 'player2_score')

@@ -13,19 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path
-
-from django.conf.urls import url, include
-from django.contrib.auth.models import User
-from rest_framework import routers, serializers, viewsets
-
-
-# ViewSets define the view behavior.
-from games.api.serializers import UserSerializer
+from rest_framework import routers
 
 # Routers provide an easy way of automatically determining the URL conf.
-from games.api.views import UserViewSet, GameViewSet
+from games.api.views import UserViewSet, GameViewSet, SimpleDemoView
+
+# ViewSets define the view behavior.
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
@@ -35,6 +31,7 @@ router.register(r'games', GameViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path(r'api/', include(router.urls)),
+    path(r'api_test/', SimpleDemoView.as_view()),
     path(r'api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
 ]
