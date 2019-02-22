@@ -1,0 +1,21 @@
+version: '3.5'
+
+services:
+  backend:
+    build: .
+    depends_on:
+      - db
+    command: devel_web
+    ports:
+      - "80:8000"
+    volumes:
+      - .:/code
+      - pip:/usr/local/lib/python3.7/site-packages
+  db:
+    image: postgres:10.1-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+volumes:
+  postgres_data:
+  pip:
