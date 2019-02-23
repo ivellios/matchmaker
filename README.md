@@ -1,8 +1,12 @@
-# Requirements
+# Matchmaker
+
+A very simple [Django](https://www.djangoproject.com/) web app for tracking match game scores as a demo for [Django REST Framework](https://www.django-rest-framework.org/) use.
+
+## Requirements
 
 You will need docker and docker-compose installed in your system.
 
-# Installation
+## Installation
 
 First build containers
 
@@ -16,7 +20,7 @@ Then run bootstrap
 $ docker-compose run backend bootstrap
 ```
 
-# Development
+## Running & Development
 
 Run docker-compose
 
