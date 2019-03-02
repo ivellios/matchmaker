@@ -19,7 +19,7 @@ from django.urls import path
 from rest_framework import routers
 
 # Routers provide an easy way of automatically determining the URL conf.
-from games.api.views import UserViewSet, GameViewSet, SimpleDemoView
+from games.api.views import UserViewSet, SimpleDemoDjangoView, SimpleDemoView, GameViewSet
 
 # ViewSets define the view behavior.
 
@@ -31,7 +31,8 @@ router.register(r'games', GameViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path(r'api/', include(router.urls)),
-    path(r'api_test/', SimpleDemoView.as_view()),
+    path(r'api_test1/', SimpleDemoDjangoView.as_view()),
+    path(r'api_test2/', SimpleDemoView.as_view()),
     path(r'api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
 ]

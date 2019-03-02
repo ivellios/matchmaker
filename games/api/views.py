@@ -1,10 +1,21 @@
+import json
+
 from django.contrib.auth.models import User
-from rest_framework import viewsets, status, views, permissions
+from django.http import HttpResponse
+from django.views import View
+from rest_framework import viewsets, status, views, permissions, mixins
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from games.models import Game
 from .serializers import UserSerializer, GameSerializer
+
+
+class SimpleDemoDjangoView(View):
+    def get(self, request):
+        param = request.GET.get('param')
+        response = json.dumps({"param": param})
+        return HttpResponse(response)
 
 
 class SimpleDemoView(views.APIView):
@@ -21,7 +32,12 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
-class GameViewSet(viewsets.ModelViewSet):
+class GameViewSet(mixins.RetrieveModelMixin,
+                  mixins.CreateModelMixin,
+                  mixins.UpdateModelMixin,
+                  mixins.DestroyModelMixin,
+                  mixins.ListModelMixin,
+                  viewsets.GenericViewSet):
     serializer_class = GameSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Game.objects.all()

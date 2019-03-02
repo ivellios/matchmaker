@@ -4,17 +4,17 @@ from rest_framework import serializers
 from ..models import Game
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('url', 'username', 'email', 'is_staff')
+        fields = ('id', 'username', 'email', 'is_staff')
 
 
-class GameSerializer(serializers.HyperlinkedModelSerializer):
+class GameSerializer(serializers.ModelSerializer):
     creator = UserSerializer(read_only=True)
 
     class Meta:
         model = Game
-        fields = ('url', 'created', 'creator',
+        fields = ('id', 'created', 'creator',
                   'player1', 'player2',
                   'player1_score', 'player2_score')
