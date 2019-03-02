@@ -47,16 +47,10 @@ class GameViewSet(mixins.RetrieveModelMixin,
 
     @action(methods=['GET'], detail=True)
     def score_player_1(self, request, *args, **kwargs):
-        instance = self.get_object()
-        instance.player1_score += 1
-        instance.save(update_fields=['player1_score'])
-
+        self.get_object().score_1()
         return Response(status=status.HTTP_200_OK)
 
     @action(methods=['GET'], detail=True)
     def score_player_2(self, request, *args, **kwargs):
-        instance = self.get_object()
-        instance.player2_score += 1
-        instance.save(update_fields=['player2_score'])
-
+        self.get_object().score_2()
         return Response(status=status.HTTP_200_OK)

@@ -12,6 +12,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 class GameSerializer(serializers.ModelSerializer):
     creator = UserSerializer(read_only=True)
+    player1_score = serializers.IntegerField()
+    player2_score = serializers.IntegerField()
 
     class Meta:
         model = Game
