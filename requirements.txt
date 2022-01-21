@@ -1,4 +1,4 @@
-ipython==7.3.0
+ipython==7.16.3
 django==2.2.18
 gunicorn==19.9.0
 djangorestframework==3.9.1
